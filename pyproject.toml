@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "whisper-dictation"
+version = "0.1.0"
+description = ""
+authors = ["Tangdi <45258158+TangdizhiH@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "whisper_dictation"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pyaudio = "^0.2.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
