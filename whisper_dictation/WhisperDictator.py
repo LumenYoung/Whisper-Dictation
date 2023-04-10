@@ -26,8 +26,8 @@ def noalsaerr():
 class Transcriber(object):
     """A class to transcribe the audio.
     """
-    def __init__(self, language:str) -> None:
-        self.language = language
+    def __init__(self, model) -> None:
+        self.model = model
 
     def transcribe(self, audio_data: np.ndarray) -> str:
         """Transcribe the audio data.
@@ -64,7 +64,7 @@ class WhisperDictator(object):
         chunk = 1024
         sample_format = pyaudio.paInt16
         channels = 1
-        rate = 44100
+        rate = 16000
 
         with noalsaerr():
         
