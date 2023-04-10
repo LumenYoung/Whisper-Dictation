@@ -1,0 +1,9 @@
+[Unit]
+Description=ydotoold service
+
+[Service]
+ExecStart=/usr/bin/ydotoold
+Restart=always
+
+[Install]
+WantedBy=default.target
