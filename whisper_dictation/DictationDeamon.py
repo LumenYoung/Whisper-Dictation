@@ -8,15 +8,15 @@ from whisper_dictation.WhisperDictator import WhisperDictator, Transcriber
 recording: bool = False
 
 
-def initializing_deamon(args: argparse.Namespace) -> WhisperDictator:
+def initializing_daemon(model_name:str) -> WhisperDictator:
 
     print("Loading Model....")
-    model_name = args.model_name
     model = load_model(model_name)
 
     transcriber = Transcriber(model)
     dictator = WhisperDictator(transcriber=transcriber, save_audio=True)
 
+    print("Load Complete!")
     return dictator
 
 
@@ -116,12 +116,5 @@ def parse_args() -> argparse.Namespace:
 
 
 if __name__ == "__main__":
+    pass
 
-    args = parse_args()
-
-    dictator = initializing_deamon(args)
-
-    selector: selectors.DefaultSelector = selectors.DefaultSelector()
-
-    # Pass the dictator instance here
-    run_daemon('localhost', 9000, selector, dictator)

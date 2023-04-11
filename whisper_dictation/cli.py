@@ -1,24 +1,30 @@
 import click
 import socket
-from whisper_dictation.DictationDeamon import run_daemon, parse_args, initializing_deamon # Assuming these are imported from your project
+# Assuming these are imported from your project
+from whisper_dictation.DictationDeamon import run_daemon, parse_args, initializing_daemon
 from whisper_dictation.WhisperDictator import WhisperDictator
 import selectors
+
 
 @click.group()
 def cli():
     pass
 
+
 @click.command()
 @click.option('--port', default=9000, help='The port for the dictation server.')
-def daemon(port):
+@click.option('--model_name', default="base", type=click.Choice(['tiny', 'tiny.en', 'base', 'base.en', 'small', 'small.en', 'medium', 'medium.en', 'large']), help='The the whisper model used on the dictation server.')
+def daemon(port, model_name):
     """Start the Whisper Dictation daemon."""
 
-    args = parse_args()
-    if args.port is not port:
-        args.port = port
-    dictator = initializing_deamon(args)
+    dictator = initializing_daemon(model_name=model_name)
     selector: selectors.DefaultSelector = selectors.DefaultSelector()
     run_daemon('localhost', port, selector, dictator)
+
+@click.command()
+def hello():
+    click.echo('Hello World!')
+
 
 @click.command()
 @click.option('--port', default=9000, help='The dictation server port to connect.')
@@ -31,7 +37,9 @@ def say(port, language):
     sock.sendall(language.encode())
     sock.close()
 
+
 cli.add_command(daemon)
+cli.add_command(hello)
 cli.add_command(say)
 
 if __name__ == "__main__":
