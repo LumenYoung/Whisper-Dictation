@@ -2,6 +2,7 @@ import pyaudio
 import wave
 import numpy as np
 import threading
+import shlex
 import os
 from ctypes import *
 from contextlib import contextmanager
@@ -38,9 +39,10 @@ class Transcriber(object):
         result = self.model.transcribe(
             audio_data, language=language, fp16=False)
 
-        os.system(
-            "kdialog --title 'Dictation copied' --passivepopup " + "'" +result['text'], "'")
-        
+        result_text = result['text']
+        escaped_result_text = shlex.quote(result_text)
+        os.system(f'kdialog --title "Dictation copied" --passivepopup {escaped_result_text}')
+
         # os.system(f"wl-copy '{result['text']}")
 
         # copy to wl-copy, not using f-string
