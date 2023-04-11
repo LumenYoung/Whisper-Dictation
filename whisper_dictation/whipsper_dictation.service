@@ -1,0 +1,10 @@
+[Unit]
+Description=The service for whisper dictation daemon
+After=network.target
+
+[Service]
+ExecStart=whisper_dictation daemon
+Restart=always
+
+[Install]
+WantedBy=default.target
