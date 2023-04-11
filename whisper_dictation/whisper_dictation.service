@@ -3,7 +3,7 @@ Description=The service for whisper dictation daemon
 After=network.target
 
 [Service]
-ExecStart=whisper_dictation daemon
+ExecStart=%h/.local/bin/whisper_dictation daemon
 Restart=always
 
 [Install]
