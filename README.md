@@ -12,19 +12,21 @@ This project is designed to work on KDE wayland. Other wayland platforms might w
 
 ## Installation
 
+Install using pip:
+
 ```
 pip install whisper_dictation
 ```
 
 ## Usage
 
-To start the project manually, you should use two terminals:
+To start the project manually, you should use two terminals, for the server:
 
 ```
 whisper_dictation daemon [--port 9000] [--model_name base]
 ```
 
-See `whisper_dictation daemon --help for all the available models`
+See `whisper_dictation daemon --help` for all the available models
 
 You can use a command to trigger the daemon, or assign a shortcut to this command in order to use it. Press once for start, and press the second time to stop the recording.
 
@@ -41,6 +43,7 @@ Alternatively, you can use the systemd service unit provided inside this repo to
 - [x] add system integration for a shortcut to start/stop dictation
 - [ ] output the dictation to where the cursor is (planned as fcitx addon).
 - [ ] optional(A system tray)
+- [ ] package it on aur
 
 
 ## Requirements
