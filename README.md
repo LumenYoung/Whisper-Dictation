@@ -2,7 +2,7 @@
 
 This is an app using openai's whisper to dictate on KDE wayland.  
 
-The project is designed as a dictation server that runs at background (To avoid the time to load model each time starts the dictation) and a client to toggle if the server should be recording. You can assign a shortcut to toggle the server to start/stop the recording (`whisper_dicatation -l [language_code]`).
+The project is designed as a dictation server that runs at background (To avoid the time to load model each time starts the dictation) and a client to toggle if the server should be recording. You can assign a shortcut to toggle the server to start/stop the recording (`whisper_dicatation --language [language_code]`).
 
 Whenever the dictation is stopped, the content will be sent to your clipboard and a notification will be displayed.
 
