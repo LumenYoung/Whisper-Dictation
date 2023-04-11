@@ -39,7 +39,8 @@ class Transcriber(object):
             audio_data, language=language, fp16=False)
 
         os.system(
-            f"kdialog --title 'Dictation copied' --passivepopup {result['text']}")
+            "kdialog --title 'Dictation copied' --passivepopup " + "'" +result['text'], "'")
+        
         # os.system(f"wl-copy '{result['text']}")
 
         # copy to wl-copy, not using f-string
@@ -66,6 +67,10 @@ class WhisperDictator(object):
     # the start function implement the function to start recording
     def start(self, language: str = None) -> None:
         # start a new thread to record the audio
+
+        # setup a timer, if the recording is not stopped after 300 seconds, stop it
+        timer = threading.Timer(300, self.stop)
+        timer.start()
 
         thread = threading.Thread(target=self._record, args=(language, ))
         thread.start()
