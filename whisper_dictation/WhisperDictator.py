@@ -4,6 +4,7 @@ import numpy as np
 import threading
 import shlex
 import os
+import subprocess
 from ctypes import *
 from contextlib import contextmanager
 
@@ -41,12 +42,14 @@ class Transcriber(object):
 
         result_text = result['text']
         escaped_result_text = shlex.quote(result_text)
-        os.system(f'kdialog --title "Dictation copied" --passivepopup {escaped_result_text}')
+
+        popup_duration = 5  # specify duration in seconds, adjust this value as needed
+        subprocess.run(["kdialog", "--title", "Dictation copied", "--passivepopup", escaped_result_text, str(popup_duration)])
 
         # os.system(f"wl-copy '{result['text']}")
 
         # copy to wl-copy, not using f-string
-        os.system("wl-copy " + result['text'])
+        subprocess.run(["wl-copy", result_text], text=True)
 
         return result["text"]
 
