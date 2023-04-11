@@ -64,25 +64,32 @@ class WhisperDictator(object):
         save_audio: bool = False,
     ) -> None:
         self.recording = False
-
+        self.stop_event = threading.Event()
         self.transcriber = transcriber
-
         self.save_audio = save_audio
 
     # the start function implement the function to start recording
     def start(self, language: str = None) -> None:
+        # Clear the stop event
+        self.stop_event.clear()
+
         # start a new thread to record the audio
-
-        # setup a timer, if the recording is not stopped after 300 seconds, stop it
-        timer = threading.Timer(300, self.stop)
-        timer.start()
-
         thread = threading.Thread(target=self._record, args=(language, ))
         thread.start()
+
+        # Set a time limit for the recording
+        stop_thread = threading.Thread(target=self._stop_timer, args=(300,))
+        stop_thread.start()
 
     # the stop function implement the function to stop recording
     def stop(self) -> None:
         self.recording = False
+        self.stop_event.set()
+
+    # The _stop_timer function will stop recording after the specified duration
+    def _stop_timer(self, duration):
+        self.stop_event.wait(duration)
+        self.stop()
 
     # the record function implement the function to record
     def _record(self, language: str) -> None:
