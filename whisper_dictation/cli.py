@@ -10,7 +10,7 @@ def cli():
 
 @click.command()
 @click.option('--port', default=9000, help='The port for the dictation server.')
-def daemon(host, port):
+def daemon(port):
     """Start the Whisper Dictation daemon."""
 
     args = parse_args()
@@ -23,7 +23,7 @@ def daemon(host, port):
 @click.command()
 @click.option('--port', default=9000, help='The dictation server port to connect.')
 @click.option('--language', default='en', help='Specify the language you want to use.')
-def say(host, port, language):
+def say(port, language):
     """Send a voice sample to the dictation server."""
 
     server_address = ('localhost', port)
