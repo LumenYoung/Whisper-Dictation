@@ -18,6 +18,8 @@ Install using pip:
 pip install whisper_dictation
 ```
 
+Note that it is recommended to install at user directory (not globally). Since the systemd service provided is written only for executable at `~/.local/bin`
+
 ## Usage
 
 To start the project manually, you should use two terminals, for the server:
@@ -36,7 +38,12 @@ whisper_dictation say [--language en]
 
 You should assign a language code, it can help with the performance especially using a small model.
 
-Alternatively, you can use the systemd service unit provided inside this repo to make the daemon running in the background. Place it in your `~/.config/systemd/user/`, enable and start it.
+Alternatively, you can use the systemd service unit provided inside this repo to make the daemon running in the background. Place it in your `~/.config/systemd/user/`, enable and start it:
+
+```
+systemctl --user enable whisper_dictation
+systemctl --user start whisper_dictation
+```
 
 ## TODO
 
