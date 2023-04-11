@@ -1,6 +1,5 @@
 import click
 import socket
-# Assuming these are imported from your project
 from whisper_dictation.DictationDeamon import run_daemon, parse_args, initializing_daemon
 from whisper_dictation.WhisperDictator import WhisperDictator
 import selectors
