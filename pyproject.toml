@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whisper-dictation"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Lumen Young <lumen.young@lumeny.io>"]
 readme = "README.md"
@@ -10,6 +10,7 @@ packages = [{include = "whisper_dictation"}]
 python = "^3.10"
 pyaudio = "^0.2.13"
 click = "^8.1.3"
+openai-whisper = "^20230314"
 
 [tool.poetry.scripts]
 whisper_dictation = "whisper_dictation.cli:cli"
